@@ -5,7 +5,7 @@ type NumberStringBoolean = number | string | boolean;
 
 
 const combine2 = (
-  a: number | string | boolean,
+  a: NumberStringBoolean,
   b: NumberStringBoolean,
   typeAs: 'as-number' | 'as-string' // literal type
 ): NumberStringBoolean => {
