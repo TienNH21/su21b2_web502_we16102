@@ -1,0 +1,23 @@
+{
+  "name": "we16102",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TienNH21/su21b2_web502_we16102.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TienNH21/su21b2_web502_we16102/issues"
+  },
+  "homepage": "https://github.com/TienNH21/su21b2_web502_we16102#readme",
+  "dependencies": {
+    "navigo": "^8.11.1"
+  }
+}
