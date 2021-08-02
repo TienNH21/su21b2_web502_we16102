@@ -18,6 +18,10 @@
   },
   "homepage": "https://github.com/TienNH21/su21b2_web502_we16102#readme",
   "dependencies": {
+    "axios": "^0.21.1",
     "navigo": "^8.11.1"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0"
   }
 }

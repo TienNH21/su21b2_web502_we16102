@@ -1,26 +1,48 @@
 import { UserCreate } from "./Components/Users/UserCreate.js";
 import { UserIndex } from "./Components/Users/UserIndex.js";
+import { UserEdit } from "./Components/Users/UserEdit.js";
 import { Component } from "./Components/Component.js";
-import Navigo from "navigo";
 
-// router
-// let gui: Component = new UserCreate();
-// gui.render();
+declare const window: any;
 
+type Route = {
+  name: string;
+  path: string | RegExp;
+};
 
-
-const router = new Navigo("/");
+type Match = {
+  url: string;
+  queryString: string;
+  hashString: string;
+  route: Route;
+  data: { [key: string]: string } | null;
+  params: { [key: string]: string } | null;
+};
 
 const routes = () => {
-  router
-    .on('/users/index', () =>{
+  window.router
+    .on('/users/index', async () => {
       const gui: Component = new UserIndex();
-      gui.render();
+      await gui.render();
+      gui.afterRender();
     })
-    .on('/users/create', () =>{
+    .on('/users/create', () => {
       const gui: Component = new UserCreate();
       gui.render();
     })
+    .on('/users/edit/:id', async (params: Match) => {
+      /*
+       * params?.data?.id
+       * Kiểm tra trong params có data không?
+       * Nếu có -> truy xuất tới data. Nếu không -> undefined;
+       * Tương tự với id
+       */
+      const id = params?.data?.id;
+      const gui: Component = new UserEdit(id);
+      await gui.render();
+      gui.afterRender();
+    })
+    .resolve();
 }
 
 routes();

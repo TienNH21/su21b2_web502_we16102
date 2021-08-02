@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "TienNH21",
+      "email": "tiennh21@fpt.edu.vn",
+      "birthday": "2020-01-01"
+    },
+    {
+      "id": 2,
+      "name": "TienNH22",
+      "email": "tiennh22@fpt.edu.vn",
+      "birthday": "2020-01-01"
+    },
+    {
+      "id": 3,
+      "name": "TienNH23",
+      "email": "tiennh23@fpt.edu.vn",
+      "birthday": "2020-01-01"
+    }
+  ]
+}

@@ -1,10 +1,13 @@
 import { Component } from "../Component.js";
-import { User } from "../../Models/User.js";
 import { UserAPI } from "../../api/UserAPI.js";
 
-export class UserCreate extends Component {
-  public constructor() {
+export class UserEdit extends Component {
+  private _id: string | undefined;
+  public constructor (id: string | undefined) {
+    // Gọi tới hàm khởi tạo lớp cha
     super();
+
+    this._id = id;
   }
 
   public template(): string {
@@ -40,32 +43,12 @@ export class UserCreate extends Component {
     `;
   }
 
-  public afterRender(): void {
-    document.getElementById('form_create')!
-      .addEventListener('submit', (event) => {
-        event.preventDefault();
+  public async afterRender() {
+    if (typeof this._id !== 'undefined') {
+      const repsonse = await UserAPI.find(this._id);
+      const data = await repsonse.json();
 
-        // Type Casting:
-        // const inputName = <HTMLInputElement> document.getElementById("name"); /* C1 */
-        const inputName = document.getElementById("name") as HTMLInputElement;   /* C2 */
-        const name: string = inputName.value;
-
-        const email: string = (<HTMLInputElement> document.getElementById("email")).value;
-        const password: string = (<HTMLInputElement> document.getElementById("password")).value;
-        const password_confirm: string = (<HTMLInputElement> document.getElementById("password_confirm")).value;
-        const birthdayStr: string = (<HTMLInputElement> document.getElementById("birthday")).value;
-        const birthday: Date = new Date(birthdayStr);
-
-        if (password !== password_confirm) {
-          // doSomething ...
-        }
-
-        let user: User = new User(0, name, email, password, birthday);
-        // UserAPI.insert(user);
-      });
-  }
-
-  public static getInstance(): Component {
-    return new UserCreate();
+      console.log(data);
+    }
   }
 }

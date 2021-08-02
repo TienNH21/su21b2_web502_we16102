@@ -1,23 +1,12 @@
 import { Component } from "../Component.js";
 import { User } from "../../Models/User.js";
+import { UserAPI } from "../../api/UserAPI.js";
 
 export class UserIndex extends Component {
   private listUser: User[];
   public constructor() {
     super();
     this.listUser = [];
-
-    this.fakeData();
-  }
-
-  private fakeData() : void {
-    let u1: User = new User(1, "Ng Van A", "anvph1@fpt.edu.vn", "123456", new Date()),
-      u2: User = new User(2, "Ng Van B", "bnvph1@fpt.edu.vn", "123456", new Date()),
-      u3: User = new User(3, "Ng Van C", "cnvph1@fpt.edu.vn", "123456", new Date());
-
-    this.listUser.push(u1);
-    this.listUser.push(u2);
-    this.listUser.push(u3);
   }
 
   public template(): string {
@@ -25,7 +14,7 @@ export class UserIndex extends Component {
       <div class="col-10 offset-1 mt-5">
         <div class="row">
           <div class="col-6">
-            <a class="btn btn-success">Create</a>
+            <a class="btn btn-success" href="/users/create" data-navigo>Create</a>
           </div>
           <div class="col-6"></div>
         </div>
@@ -45,8 +34,11 @@ export class UserIndex extends Component {
     `;
   }
 
-  public afterRender(): void {
-    const tbodyContents: string = this.listUser.map((value, key) => {
+  public async afterRender() {
+    const response = await UserAPI.all();
+    const data = await response.json();
+
+    const tbodyContents: string = data.map((value: User, key: number) => {
       return `
         <tr>
           <td>${value.id}</td>
@@ -54,7 +46,10 @@ export class UserIndex extends Component {
           <td>${value.email}</td>
           <td>${value.birthday}</td>
           <td>
-            <a class="btn btn-primary">
+            <a
+              data-navigo
+              href="/#/users/edit/${value.id}"
+              class="btn btn-primary">
               Update
             </a>
           </td>
