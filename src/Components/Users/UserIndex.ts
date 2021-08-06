@@ -54,7 +54,7 @@ export class UserIndex extends Component {
             </a>
           </td>
           <td>
-            <button class="btn btn-danger">
+            <button id="btn_delete_${value.id}" data-id="${value.id}" class="btn btn-danger">
               Delete
             </button>
           </td>
@@ -64,5 +64,19 @@ export class UserIndex extends Component {
 
     // Event Delegation
     document.getElementById('tbl_users')!.innerHTML = tbodyContents;
+
+    /*
+     * button[id^='btn_delete_']:
+     * Tìm tất cả các button, có thuộc tính id bắt đầu là btn_delete
+     */
+    const listBtn: NodeListOf<HTMLButtonElement> = document.querySelectorAll("button[id^='btn_delete_']");
+    listBtn.forEach((btn) => {
+      btn.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        const id = +btn.dataset.id!;
+        UserAPI.delete(id);
+      });
+    });
   }
 }

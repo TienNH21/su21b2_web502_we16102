@@ -26,9 +26,10 @@ const routes = () => {
       await gui.render();
       gui.afterRender();
     })
-    .on('/users/create', () => {
+    .on('/users/create', async () => {
       const gui: Component = new UserCreate();
-      gui.render();
+      await gui.render();
+      gui.afterRender();
     })
     .on('/users/edit/:id', async (params: Match) => {
       /*
@@ -41,6 +42,9 @@ const routes = () => {
       const gui: Component = new UserEdit(id);
       await gui.render();
       gui.afterRender();
+    })
+    .on('/users/delete/:id', async (params: Match) => {
+      //
     })
     .resolve();
 }

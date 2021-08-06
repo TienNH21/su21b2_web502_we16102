@@ -61,11 +61,7 @@ export class UserCreate extends Component {
         }
 
         let user: User = new User(0, name, email, password, birthday);
-        // UserAPI.insert(user);
+        UserAPI.insert(user);
       });
-  }
-
-  public static getInstance(): Component {
-    return new UserCreate();
   }
 }

@@ -1,12 +1,6 @@
 {
   "users": [
     {
-      "id": 1,
-      "name": "TienNH21",
-      "email": "tiennh21@fpt.edu.vn",
-      "birthday": "2020-01-01"
-    },
-    {
       "id": 2,
       "name": "TienNH22",
       "email": "tiennh22@fpt.edu.vn",
@@ -17,6 +11,13 @@
       "name": "TienNH23",
       "email": "tiennh23@fpt.edu.vn",
       "birthday": "2020-01-01"
+    },
+    {
+      "name": "tiennh21",
+      "email": "tiennh21@fpt.edu.vn",
+      "birthday": "2021-01-01",
+      "password": "123456",
+      "id": 4
     }
   ]
 }
