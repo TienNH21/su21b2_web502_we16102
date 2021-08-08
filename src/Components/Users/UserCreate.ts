@@ -2,6 +2,8 @@ import { Component } from "../Component.js";
 import { User } from "../../Models/User.js";
 import { UserAPI } from "../../api/UserAPI.js";
 
+declare const window: any;
+
 export class UserCreate extends Component {
   public constructor() {
     super();
@@ -14,6 +16,10 @@ export class UserCreate extends Component {
           <div class="row mt-4">
             <label class="col-2">Họ Tên</label>
             <input type="text" name="name" id="name" class="form-control col-10" />
+          </div>
+          <div class="row mt-4">
+            <label class="col-2">Avatar</label>
+            <input type="file" name="avatar" id="avatar" class="form-control col-10" />
           </div>
           <div class="row mt-4">
             <label class="col-2">Email</label>
@@ -42,7 +48,7 @@ export class UserCreate extends Component {
 
   public afterRender(): void {
     document.getElementById('form_create')!
-      .addEventListener('submit', (event) => {
+      .addEventListener('submit', async (event) => {
         event.preventDefault();
 
         // Type Casting:
@@ -51,6 +57,12 @@ export class UserCreate extends Component {
         const name: string = inputName.value;
 
         const email: string = (<HTMLInputElement> document.getElementById("email")).value;
+        const avatar: File = (<HTMLInputElement> document.getElementById("avatar")).files![0];
+
+        const storageRef = await window.firebase.storage().ref(`images/${avatar.name}`);
+        await storageRef.put(avatar);
+        const url = await storageRef.getDownloadURL();
+
         const password: string = (<HTMLInputElement> document.getElementById("password")).value;
         const password_confirm: string = (<HTMLInputElement> document.getElementById("password_confirm")).value;
         const birthdayStr: string = (<HTMLInputElement> document.getElementById("birthday")).value;
@@ -61,7 +73,7 @@ export class UserCreate extends Component {
         }
 
         let user: User = new User(0, name, email, password, birthday);
-        UserAPI.insert(user);
+        // UserAPI.insert(user);
       });
   }
 }

@@ -11,12 +11,12 @@ type Route = {
 };
 
 type Match = {
-  url: string;
-  queryString: string;
-  hashString: string;
-  route: Route;
+  // url: string;
+  // queryString: string;
+  // hashString: string;
+  // route: Route;
   data: { [key: string]: string } | null;
-  params: { [key: string]: string } | null;
+  // params: { [key: string]: string } | null;
 };
 
 const routes = () => {
@@ -32,6 +32,12 @@ const routes = () => {
       gui.afterRender();
     })
     .on('/users/edit/:id', async (params: Match) => {
+      /*
+      params
+        - phải là object
+        - trong object có 1 key là data. data có kiểu dữ liệu là object
+      */
+
       /*
        * params?.data?.id
        * Kiểm tra trong params có data không?

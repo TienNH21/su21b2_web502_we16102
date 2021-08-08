@@ -12,7 +12,16 @@
     <div id="root"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/navigo@8.11.1/lib/navigo.min.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+
+    <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-storage.js"></script>
     <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {};
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        window.firebase = firebase;
         window.router = new Navigo('/', { hash: true, linksSelector: "a" });
     </script>
     <script type="module" src="./dist/index.js"></script>

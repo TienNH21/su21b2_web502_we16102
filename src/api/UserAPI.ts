@@ -21,10 +21,28 @@ export class UserAPI {
       birthday: '2020-01-02',
     };
 
-    console.log(user, data);
-
     return fetch(url, {
       method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+    });
+  }
+
+  public static update(user: User) {
+    const url: string = `http://localhost:3000/users/${user.id}`;
+
+    const data = {
+      name: user.name,
+      email: user.email,
+      password: user.password,
+      birthday: '2020-01-02',
+    };
+
+    return fetch(url, {
+      method: "PUT",
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
